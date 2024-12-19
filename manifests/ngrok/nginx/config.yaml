@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grpc-nginx-config
+data:
+  nginx.conf.template: |
+
+    events {}
+    stream {
+
+    upstream kfp_grpc {
+      server ${KFP_NGROK_GRPC_HOSTNAME}:${KFP_NGROK_GRPC_PORT};
+    }
+    
+    upstream kfp_http {
+      server ${KFP_NGROK_HTTP_HOSTNAME}:${KFP_NGROK_HTTP_PORT};
+    }
+    
+    # Listen on local 8887 and forward to grpc ngrok endpoint
+    server {
+      listen 8887;
+      proxy_pass kfp_grpc;
+    }
+    
+    # Listen on local 8888 and forward to http ngrok endpoint
+    server {
+      listen 8888;
+      proxy_pass kfp_http;
+      }
+    }
+    pid /tmp/nginx.pid; # Use a writable location for the PID file

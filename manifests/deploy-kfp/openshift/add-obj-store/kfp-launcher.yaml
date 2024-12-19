@@ -1,0 +1,19 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kfp-launcher
+data:
+  defaultPipelineRoot: 's3://mlpipeline'
+  providers: |
+    s3:
+      default:
+        endpoint: http://minio-kubeflow.apps.hukhan-9.dev.datahub.redhat.com
+        disableSSL: true
+        region: minio
+        credentials:
+          fromEnv: false
+          secretRef:
+            secretName: mlpipeline-minio-artifact
+            accessKeyKey: accesskey
+            secretKeyKey: secretkey
+          

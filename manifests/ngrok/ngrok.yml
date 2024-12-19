@@ -1,0 +1,13 @@
+# ngrok start --all --config ngrok.yml
+version: "2"
+# get from: https://dashboard.ngrok.com/get-started/your-authtoken
+authtoken:
+tunnels:
+  grpc:
+    proto: tcp
+    addr: 8887
+    inspect: false
+  http:
+    proto: tcp
+    addr: 8888
+    inspect: false

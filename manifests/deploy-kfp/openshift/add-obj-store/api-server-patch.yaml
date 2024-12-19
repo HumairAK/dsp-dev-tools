@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-pipeline
+  namespace: kubeflow
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: MINIO_SERVICE_SERVICE_HOST
+              value: minio-kubeflow.apps.hukhan-9.dev.datahub.redhat.com
+            - name: MINIO_SERVICE_SERVICE_PORT
+              value: "80"
+            - name: MINIO_SERVICE_REGION
+              value: minio
+            - name: MINIO_SERVICE_SECURE
+              value: "false"
+            - name: MINIO_PIPELINE_BUCKET_NAME
+              value: mlpipeline
+          name: ml-pipeline-api-server
+      serviceAccountName: ml-pipeline

@@ -9,8 +9,8 @@ spec:
       containers:
         - env:
             - name: V2_DRIVER_IMAGE
-              value: gcr.io/ml-pipeline/kfp-driver:latest
+              value: quay.io/hukhan/kfp-driver:fix_deps_1
             - name: V2_LAUNCHER_IMAGE
-              value: gcr.io/ml-pipeline/kfp-launcher:latest
+              value: quay.io/hukhan/kfp-launcher:fix_deps_1
           name: ml-pipeline-api-server
       serviceAccountName: ml-pipeline

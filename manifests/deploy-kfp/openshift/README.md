@@ -61,22 +61,22 @@ kustomize edit set image ${SRC}=${TARGET}
 
 # api-server
 SRC=gcr.io/ml-pipeline/api-server
-TARGET=opendatahub/ds-pipelines-api-server:latest
+TARGET=quay.io/hukhan/ds-pipelines-api-server:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 
 # Persistent Agent
 SRC=gcr.io/ml-pipeline/persistenceagent
-TARGET=quay.io/hukhan/persistenceagent:latest
+TARGET=quay.io/hukhan/persistenceagent:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 
 # frontend
 SRC=gcr.io/ml-pipeline/frontend
-TARGET=quay.io/opendatahub/ds-pipelines-frontend:latest
+TARGET=quay.io/hukhan/ds-pipelines-frontend:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 
 # scheduledworkflow
 SRC=gcr.io/ml-pipeline/scheduledworkflow
-TARGET=quay.io/opendatahub/ds-pipelines-scheduledworkflow:latest
+TARGET=quay.io/hukhan/ds-pipelines-scheduledworkflow:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 ```
 
@@ -87,8 +87,8 @@ kustomize edit set image ${SRC}=${TARGET}
 These are set as ENV vars to api server, so they need to be changed manually: 
 
 ```bash
-LAUNCHER_IMAGE=quay.io/opendatahub/ds-pipelines-launcher:latest
-DRIVER_IMAGE=quay.io/opendatahub/ds-pipelines-driver:latest
+LAUNCHER_IMAGE=quay.io/hukhan/kfp-launcher:11281
+DRIVER_IMAGE=quay.io/hukhan/kfp-driver:11281
 
 # from repo root
 cd manifests/deploy-kfp/openshift/base

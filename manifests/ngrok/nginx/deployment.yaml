@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-nginx
+  template:
+    metadata:
+      labels:
+        app: grpc-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: quay.io/hukhan/nginx:1.27.3-perl
+          env:
+            - name: KFP_NGROK_HTTP_HOSTNAME
+              value: "6.tcp.ngrok.io"
+            - name: KFP_NGROK_HTTP_PORT
+              value: "16836"
+            - name: KFP_NGROK_GRPC_HOSTNAME
+              value: "6.tcp.ngrok.io"
+            - name: KFP_NGROK_GRPC_PORT
+              value: "18128"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p /tmp/nginx && \
+              envsubst < /etc/nginx/nginx.conf.template > /tmp/nginx/nginx.conf && \
+              nginx -c /tmp/nginx/nginx.conf -g 'daemon off;'
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf.template
+              subPath: nginx.conf.template
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: grpc-nginx-config
