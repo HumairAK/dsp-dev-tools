@@ -4,7 +4,9 @@ metadata:
   name: grpc-nginx-config
 data:
   nginx.conf.template: |
-
+    pid /tmp/nginx.pid; # Use a writable location for the PID file
+    error_log /dev/stderr info;
+    
     events {}
     stream {
 
@@ -28,4 +30,3 @@ data:
       proxy_pass kfp_http;
       }
     }
-    pid /tmp/nginx.pid; # Use a writable location for the PID file

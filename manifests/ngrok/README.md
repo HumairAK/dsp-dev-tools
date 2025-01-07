@@ -49,7 +49,6 @@ kustomize build . | oc -n $namespace apply -f -
 oc -n $namespace rollout restart deployment/grpc-nginx
 ```
 
-
 ### Troubleshooting
 
 ```
@@ -59,3 +58,5 @@ rpc error: code = Unavailable desc = connection error: desc = "transport:
 Error while dialing: dial tcp [::1]:8887: connect: connection refused"
 ```
 
+* Make sure the mappings for port/host are accurate
+* If using the updated driver image where we set ML PIPELINE HOST, make sure it's set to the service (and not localhost) when starting api server

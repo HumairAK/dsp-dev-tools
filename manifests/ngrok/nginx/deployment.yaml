@@ -17,19 +17,21 @@ spec:
           image: quay.io/hukhan/nginx:1.27.3-perl
           env:
             - name: KFP_NGROK_HTTP_HOSTNAME
-              value: "6.tcp.ngrok.io"
+              value: "4.tcp.ngrok.io"
             - name: KFP_NGROK_HTTP_PORT
-              value: "16836"
+              value: "13080"
             - name: KFP_NGROK_GRPC_HOSTNAME
               value: "6.tcp.ngrok.io"
             - name: KFP_NGROK_GRPC_PORT
-              value: "18128"
+              value: "14783"
           command:
             - /bin/sh
             - -c
             - |
               mkdir -p /tmp/nginx && \
+              echo "Created /tmp/nginx directory" && \
               envsubst < /etc/nginx/nginx.conf.template > /tmp/nginx/nginx.conf && \
+              cat /tmp/nginx/nginx.conf && \
               nginx -c /tmp/nginx/nginx.conf -g 'daemon off;'
           volumeMounts:
             - name: nginx-config
