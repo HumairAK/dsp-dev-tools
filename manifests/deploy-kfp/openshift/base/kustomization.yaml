@@ -20,19 +20,93 @@ patchesStrategicMerge:
 - cache-deploy-patch.yaml
 - ui-patch.yaml
 
-images:
-- name: gcr.io/ml-pipeline/api-server
-  newName: quay.io/hukhan/ds-pipelines-api-server
-  newTag: fix_deps_1
-- name: gcr.io/ml-pipeline/frontend
-  newName: quay.io/hukhan/ds-pipelines-frontend
-  newTag: fix_deps_1
-- name: gcr.io/ml-pipeline/persistenceagent
-  newName: quay.io/hukhan/persistenceagent
-  newTag: fix_deps_1
-- name: gcr.io/ml-pipeline/scheduledworkflow
-  newName: quay.io/hukhan/ds-pipelines-scheduledworkflow
-  newTag: fix_deps_1
-- name: gcr.io/ml-pipeline/workflow-controller
-  newName: quay.io/argoproj/workflow-controller
-  newTag: v3.4.16
+#images:
+#- name: ghcr.io/kubeflow/kfp-api-server
+#  newName: quay.io/hukhan/ds-pipelines-api-server
+#  newTag: broken-ci-1
+#- name: gcr.io/ml-pipeline/frontend
+#  newName: quay.io/hukhan/ds-pipelines-frontend
+#  newTag: 2.4.0-release-1
+#- name: gcr.io/ml-pipeline/persistenceagent
+#  newName: quay.io/hukhan/persistenceagent
+#  newTag: 2.3.0
+#- name: gcr.io/ml-pipeline/scheduledworkflow
+#  newName: quay.io/hukhan/ds-pipelines-scheduledworkflow
+#  newTag: 2.3.0
+#- name: gcr.io/ml-pipeline/workflow-controller
+#  newName: quay.io/argoproj/workflow-controller
+#  newTag: v3.4.16
+
+patchesJson6902:
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: cache-server
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: metadata-envoy-deployment
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: metadata-grpc-deployment
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: metadata-writer
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: minio
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline-persistenceagent
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline-scheduledworkflow
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline-ui
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline-viewer-crd
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: ml-pipeline-visualizationserver
+    version: v1
+- path: remove-sc.json
+  target:
+    group: apps
+    kind: Deployment
+    name: mysql
+    version: v1
