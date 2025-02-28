@@ -60,22 +60,22 @@ TARGET=quay.io/argoproj/workflow-controller:v3.4.16
 kustomize edit set image ${SRC}=${TARGET}
 
 # api-server
-SRC=gcr.io/ml-pipeline/api-server
+SRC=ghcr.io/kubeflow/kfp-api-server
 TARGET=quay.io/hukhan/ds-pipelines-api-server:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 
 # Persistent Agent
-SRC=gcr.io/ml-pipeline/persistenceagent
+SRC=ghcr.io/kubeflow/kfp-persistence-agent
 TARGET=quay.io/hukhan/persistenceagent:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 
 # frontend
-SRC=gcr.io/ml-pipeline/frontend
-TARGET=quay.io/hukhan/ds-pipelines-frontend:fix_deps_1
+SRC=ghcr.io/kubeflow/kfp-frontend
+TARGET=quay.io/hukhan/ds-pipelines-frontend:2.4.0-release-1
 kustomize edit set image ${SRC}=${TARGET}
 
 # scheduledworkflow
-SRC=gcr.io/ml-pipeline/scheduledworkflow
+SRC=ghcr.io/kubeflow/kfp-scheduled-workflow-controller
 TARGET=quay.io/hukhan/ds-pipelines-scheduledworkflow:fix_deps_1
 kustomize edit set image ${SRC}=${TARGET}
 ```
